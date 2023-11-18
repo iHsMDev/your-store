@@ -13,9 +13,12 @@ const userSchema = new Schema({
   image: {
     type: String,
   },
-  Cart: {
+  cart: {
     type: Array,
     default: [],
+  },
+  platform: {
+    type: String,
   },
 });
 

@@ -1,5 +1,5 @@
-import User from "@/utils/Models/Users";
 import { connectToDB } from "@/utils/Database";
+import User from "@/utils/Models/Users";
 import {
   Account,
   NextAuthOptions,
@@ -25,14 +25,15 @@ export const AuthConfig: NextAuthOptions = {
   callbacks: {
     async signIn({ user, account, profile, email, credentials }: SignInParams) {
       await connectToDB();
+
       const userFind = await User.findOne({ email: user?.email });
-      if (userFind.image !== user?.image) {
+      if (userFind?.image !== user?.image) {
         await User.findOneAndUpdate(
           { email: user?.email },
           { image: user?.image }
         );
       }
-      if (userFind.name !== user?.name) {
+      if (userFind?.name !== user?.name) {
         await User.findOneAndUpdate(
           { email: user?.email },
           { name: user?.name }
@@ -43,6 +44,7 @@ export const AuthConfig: NextAuthOptions = {
           email: user?.email,
           name: user?.name,
           image: user?.image,
+          platform: account?.provider,
         }).save();
       }
       return true;
