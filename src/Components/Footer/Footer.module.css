@@ -1,0 +1,7 @@
+.footer {
+  background: var(--footer);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-block: 50px;
+}

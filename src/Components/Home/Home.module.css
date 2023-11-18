@@ -1,0 +1,94 @@
+.header {
+  color: var(--clr-brand);
+  text-align: right;
+  font-size: 46px;
+
+  font-weight: 700;
+}
+.paragraph {
+  color: var(--clr-black);
+  text-align: right;
+  font-size: 26px;
+  direction: rtl;
+}
+
+.texts {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.vector {
+  width: clamp(45vw, 100vw, 100px);
+  height: auto;
+}
+.buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 18px;
+  flex-direction: row-reverse;
+}
+.btn {
+  padding-inline: 50px;
+  font-size: clamp(0vw, 3.5vw, 16px);
+  border: none;
+  padding-block: 16px;
+  cursor: pointer;
+  border-radius: var(--btn-radius);
+}
+.primaryBTN {
+  background-color: var(--clr-brand);
+  color: var(--clr-bg);
+}
+.secondaryBTN {
+  background-color: var(--clr-secondary-button);
+  color: var(--clr-black);
+}
+@media only screen and (max-width: 900px) {
+  .vector {
+    width: 55vw;
+  }
+  .header {
+    font-size: 2rem;
+  }
+  .paragraph {
+    font-size: 1rem;
+  }
+  .btn {
+    padding-inline: 30px;
+  }
+  .texts {
+    align-items: center;
+  }
+}
+@media only screen and (max-width: 788px) {
+  .vector {
+    width: 100vw;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .header {
+    font-size: 2rem;
+  }
+  .header,
+  .paragraph {
+    text-align: center;
+  }
+  .texts {
+    align-items: center;
+  }
+  .buttons {
+    width: 100%;
+    gap: 8px;
+    justify-content: space-evenly;
+  }
+  .btn {
+    padding-block: auto;
+  }
+
+  .vector {
+    width: 100vw;
+  }
+  .paragraph {
+    font-size: 1rem;
+  }
+}
