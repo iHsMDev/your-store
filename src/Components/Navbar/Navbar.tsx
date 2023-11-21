@@ -1,13 +1,14 @@
 "use client";
 
 import { Links, StoreName } from "@/Data/Info";
+import { ScrollToElement } from "@/Functions/ScrollToElement";
 import { LinksTypes } from "@/Types/Types";
 import classNames from "classnames";
 import { motion } from "framer-motion";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useContext, useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useContext } from "react";
 import { FiShoppingBag } from "react-icons/fi";
 import { RiCloseFill, RiMenu3Fill } from "react-icons/ri";
 import { Menu } from "../Provider/DropDownProvider";
@@ -18,6 +19,7 @@ const Navbar = () => {
   const pathname = usePathname();
   const context = useContext(Menu);
   const { isOpen, setIsOpen } = context;
+  const router = useRouter();
 
   const { data } = useSession();
   const user = data?.user;
@@ -34,12 +36,6 @@ const Navbar = () => {
         delay: 0.05 * index,
       },
     }),
-    hover: {
-      color: "var(--clr-link-active)",
-      transition: {
-        delay: 0.05,
-      },
-    },
   };
 
   const ButtonAnimation = {
@@ -92,7 +88,6 @@ const Navbar = () => {
     },
   };
 
-
   const linksFn = (link: LinksTypes) => {
     if (link.type === "Link") {
       return (
@@ -101,7 +96,6 @@ const Navbar = () => {
             variants={LinksAnimation}
             initial="hidden"
             animate="animate"
-            whileHover="hover"
             custom={link.index}
             className={classNames({
               [styles.active]: pathname === link.href,
@@ -124,6 +118,7 @@ const Navbar = () => {
           className={classNames({
             [styles.link]: true,
           })}
+          onClick={() => ScrollToElement(link.href, router)}
           key={link.index}
         >
           {link.value}

@@ -1,5 +1,5 @@
 import Categories from "@/Components/Products/Categories/Categories";
-import Header from "@/Components/Products/Header/Header";
+import Header from "@/Components/Header/Header";
 import MaybeYouLike from "@/Components/Products/MaybeYouLike/MaybeYouLike";
 import { Links, StoreName } from "@/Data/Info";
 import { Metadata } from "next";

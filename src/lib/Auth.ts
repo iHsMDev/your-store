@@ -16,6 +16,7 @@ type SignInParams = {
   credentials?: Record<string, any>;
 };
 export const AuthConfig: NextAuthOptions = {
+  secret: "haha",
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,

@@ -17,6 +17,10 @@ const userSchema = new Schema({
     type: Array,
     default: [],
   },
+  total: {
+    type: Number,
+    default: 0,
+  },
   platform: {
     type: String,
   },

@@ -43,6 +43,7 @@ const Features = () => {
         once: true,
       }}
       className={styles.container}
+      id="Features"
     >
       <motion.header
         variants={headerAnimation}

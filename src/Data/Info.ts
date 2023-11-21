@@ -10,7 +10,7 @@ export const Links = [
     type: "Link",
   },
   {
-    href: "#Features",
+    href: "Features",
     value: "المميزات",
     type: "InView",
   },

@@ -16,11 +16,13 @@ const Card = ({
   price,
   index,
   name,
+  width,
 }: {
   img: string;
   price: number;
   index: number;
   name: string;
+  width?: number;
 }) => {
   const router = useRouter();
   const cardsAnimation = {
@@ -94,6 +96,7 @@ const Card = ({
         once: true,
       }}
       className={styles.card}
+      style={{ width: `${width}px` }}
     >
       <Image src={img} alt="wtf" />
       <div className={styles.price}>

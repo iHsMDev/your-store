@@ -1,8 +1,10 @@
 import { Links } from "@/Data/Info";
+import { ScrollToElement } from "@/Functions/ScrollToElement";
+import { LinksTypes } from "@/Types/Types";
 import classNames from "classnames";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { FiShoppingBag } from "react-icons/fi";
 import styles from "./Navbar.module.css";
 const DropDown = ({
@@ -45,6 +47,45 @@ const DropDown = ({
     },
   };
   const pathname = usePathname();
+  const router = useRouter();
+  const linksFn = (link: LinksTypes) => {
+    if (link.type === "Link") {
+      return (
+        <Link key={link.index} href={link.href}>
+          <motion.li
+            variants={LinksAnimation}
+            initial="hidden"
+            animate="animate"
+            custom={link.index}
+            className={classNames({
+              [styles.active]: pathname === link.href,
+              [styles.link]: true,
+            })}
+          >
+            {link.value}
+          </motion.li>
+        </Link>
+      );
+    }
+    if (link.type === "InView") {
+      return (
+        <motion.li
+          variants={LinksAnimation}
+          initial="hidden"
+          animate="animate"
+          whileHover="hover"
+          custom={link.index}
+          className={classNames({
+            [styles.link]: true,
+          })}
+          onClick={() => ScrollToElement(link.href, router)}
+          key={link.index}
+        >
+          {link.value}
+        </motion.li>
+      );
+    }
+  };
 
   return (
     <motion.div
@@ -54,23 +95,8 @@ const DropDown = ({
       className={styles.dropdown}
     >
       <ul className={styles.dropdownUL}>
-        {Links.map((link, index) => (
-          <Link onClick={() => setIsOpen(false)} key={index} href={link.href}>
-            <motion.li
-              variants={LinksAnimation}
-              initial="hidden"
-              animate="animate"
-              whileHover="hover"
-              custom={index}
-              className={classNames({
-                [styles.active]: pathname === link.href,
-                [styles.link]: true,
-              })}
-            >
-              {link.value}
-            </motion.li>
-          </Link>
-        ))}
+        {Links.map((link, index) => linksFn({ ...link, index: index + 3 }))}
+
         <Link href="/Cart" className={styles.shoppingCart}>
           <motion.p
             variants={LinksAnimation}

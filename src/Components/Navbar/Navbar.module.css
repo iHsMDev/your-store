@@ -57,6 +57,9 @@
   font-weight: 500;
   font-size: 1.1rem;
 }
+.link:hover {
+  color: var(--clr-link-active);
+}
 .active {
   position: relative;
 

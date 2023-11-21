@@ -27,6 +27,7 @@
   object-fit: cover;
   border-radius: var(--btn-radius);
   direction: ltr;
+  flex: 1;
 }
 .button {
   padding-inline: 15px;

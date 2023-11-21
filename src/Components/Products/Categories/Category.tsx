@@ -67,7 +67,7 @@ const Category = ({
       <div className={styles.icon}>{icon()}</div>
       <footer className={styles.footer}>
         <div className={styles.buttons}>
-          <Link href={href}>
+          <Link href={`/category/${href}`}>
             <motion.button
               variants={dataAniamtion}
               initial="hidden"
