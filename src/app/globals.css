@@ -8,9 +8,11 @@
 }
 
 :root {
-  --clr-brand: #5d5fef;
-  --clr-danger: #ef5d5d;
+  --clr-brand: #5c5ef0;
+  --clr-danger: #f05c5c;
   --clr-brand-darker: #4e50d2;
+  --clr-warning: #f0c85c;
+  --clr-info: #5cbaf0;
   --clr-bg: white;
   --clr-gray: #d9d9d9;
   --clr-black: #0e0e2c;
@@ -24,6 +26,10 @@
     var(--clr-gray) 0deg,
     rgba(146, 146, 146, 0) 360deg
   );
+  --toastify-color-info: var(--clr-info);
+  --toastify-color-success: var(--clr-brand);
+  --toastify-color-warning: var(--clr-warning);
+  --toastify-color-error: var(--clr-danger);
 }
 
 body {

@@ -3,7 +3,51 @@
   width: 100%;
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
   background: var(--clr-brand);
   margin-top: 180px;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 13px;
+  align-items: center;
+  margin-bottom: 23px;
+}
+
+.text {
+  font-weight: 700;
+  color: white;
+  font-size: 3rem;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.cardHeader {
+  font-size: 2rem;
+  line-height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.card {
+  width: 250px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding-inline: 10px;
+  background: var(--clr-brand-darker);
+  color: white;
+  border-radius: var(--btn-radius);
 }

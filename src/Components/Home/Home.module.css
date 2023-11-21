@@ -43,18 +43,20 @@
   background-color: var(--clr-secondary-button);
   color: var(--clr-black);
 }
+
 @media only screen and (max-width: 900px) {
   .vector {
-    width: 55vw;
+    width: 100vw;
   }
   .header {
-    font-size: 2rem;
+    font-size: 3rem;
   }
   .paragraph {
-    font-size: 1rem;
+    font-size: 2rem;
   }
   .btn {
-    padding-inline: 30px;
+    padding-inline: 50px;
+    font-size: 1rem;
   }
   .texts {
     align-items: center;
@@ -68,6 +70,10 @@
 @media only screen and (max-width: 600px) {
   .header {
     font-size: 2rem;
+  }
+  .btn {
+    padding-inline: 50px;
+    font-size: 0.8rem;
   }
   .header,
   .paragraph {

@@ -1,0 +1,19 @@
+.container {
+  margin-bottom: 20px;
+}
+
+.cards {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+.card {
+  width: 420px;
+  height: 300px;
+  background: var(--clr-gray);
+  border-radius: var(--btn-radius);
+}
+
+.card:last-child {
+  flex: 1;
+}

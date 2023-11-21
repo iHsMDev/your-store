@@ -26,28 +26,3 @@
   padding-inline: 180px;
   width: 100%;
 }
-@media only screen and (max-width: 600px) {
-  .container {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-inline: 0;
-  }
-}
-
-@media only screen and (max-width: 900px) {
-  .container {
-    justify-content: center;
-    align-items: center;
-    padding-inline: 25px;
-  }
-}
-
-@media only screen and (max-width: 788px) {
-  .container {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-inline: 0;
-  }
-}

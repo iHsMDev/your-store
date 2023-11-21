@@ -1,7 +1,33 @@
 .footer {
+  position: relative;
   background: var(--footer);
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   padding-block: 50px;
+  padding-inline: 50px;
+}
+
+.logo {
+  height: 50px;
+  width: auto;
+}
+
+.topButton {
+  background-color: var(--clr-brand);
+  height: 50px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  border-radius: var(--btn-radius);
+  cursor: pointer;
+}
+
+.name {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }

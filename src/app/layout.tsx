@@ -5,7 +5,10 @@ import DropDownProvider from "@/Components/Provider/DropDownProvider";
 import { Links, StoreDescription, StoreName } from "@/Data/Info";
 import type { Metadata } from "next";
 import { Tajawal } from "next/font/google";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
+
 const tajawal = Tajawal({
   subsets: ["arabic"],
   weight: ["700", "500"],
@@ -30,6 +33,16 @@ export default function RootLayout({
             <Navbar />
             {children}
             <Footer />
+            <ToastContainer
+              position="bottom-left"
+              autoClose={2000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              rtl={true}
+              draggable={false}
+              closeOnClick
+              pauseOnHover
+            />
           </DropDownProvider>
         </AuthProvider>
       </body>
