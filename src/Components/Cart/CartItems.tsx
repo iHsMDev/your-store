@@ -1,5 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import Empty from "public/Empty.svg";
 import styles from "./Cart.module.css";
 import Item from "./Item";
 const CartItems = ({ Items }: { Items: any }) => {
@@ -63,9 +65,23 @@ const CartItems = ({ Items }: { Items: any }) => {
           />
         ))
       ) : (
-        <motion.p variants={ani} initial="hidden" animate="animate" custom={5}>
-          لا يوجد منتجات في السلة
-        </motion.p>
+        <motion.section
+          variants={ani}
+          initial="hidden"
+          animate="animate"
+          custom={4}
+          className={styles.empty}
+        >
+          <Image className={styles.emptyImage} src={Empty} alt="" />
+          <motion.p
+            variants={ani}
+            initial="hidden"
+            animate="animate"
+            custom={5}
+          >
+            لا توجد منتجات في السلة
+          </motion.p>
+        </motion.section>
       )}
     </div>
   );
