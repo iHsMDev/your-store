@@ -9,6 +9,19 @@ const descDefault = {
   img: "",
   price: "",
 };
+
+export const getCartLength = async (email: string) => {
+  try {
+    await connectToDB();
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      return 0;
+    }
+    return user.cart.length;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
 export const AddToCart = async (index: number, email: string, carts?: []) => {
   try {
     await connectToDB();
@@ -38,6 +51,7 @@ export const AddToCart = async (index: number, email: string, carts?: []) => {
       { cart: oldCart }
     ).then(async () => {
       revalidatePath("/Cart", "layout");
+      revalidatePath("/");
       let allprice = [];
       for (let i = 0; i < user.cart.length; i++) {
         const element = user.cart[i];
@@ -68,7 +82,9 @@ export const getTotal = async (email: string) => {
   try {
     await connectToDB();
     const user = await User.findOne({ email: email });
-
+    if (!user) {
+      return 0;
+    }
     return user.total;
   } catch (error: any) {
     throw new Error(error.message);

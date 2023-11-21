@@ -15,7 +15,7 @@ const Cart = async () => {
       <SideBar {...session?.user} total={total} />
 
       <Suspense fallback={<h1>Loading..</h1>}>
-        <CartItems Items={items} />
+        <CartItems Items={items ? items : []} />
       </Suspense>
     </div>
   );

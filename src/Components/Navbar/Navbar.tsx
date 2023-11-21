@@ -15,7 +15,7 @@ import { Menu } from "../Provider/DropDownProvider";
 import AccountSection from "./AccountSection";
 import DropDown from "./DropDown";
 import styles from "./Navbar.module.css";
-const Navbar = () => {
+const Navbar = ({ length }: { length: number }) => {
   const pathname = usePathname();
   const context = useContext(Menu);
   const { isOpen, setIsOpen } = context;
@@ -23,7 +23,6 @@ const Navbar = () => {
 
   const { data } = useSession();
   const user = data?.user;
-
   const LinksAnimation = {
     hidden: {
       y: 25,
@@ -163,7 +162,11 @@ const Navbar = () => {
               custom={1}
               className={styles.linebetween}
             />
-            <Link href="/Cart" className={styles.shoppingCart}>
+            <Link
+              href="/Cart"
+              aria-length={length}
+              className={`${styles.shoppingCart} ${length > 0 && styles.length}`}
+            >
               <motion.p
                 variants={LinksAnimation}
                 initial="hidden"

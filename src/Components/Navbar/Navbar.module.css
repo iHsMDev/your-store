@@ -88,10 +88,37 @@
   cursor: pointer;
 }
 .shoppingCart {
+  position: relative;
   color: var(--clr-brand);
   line-height: 100%;
   font-size: 24px;
 }
+.length::after {
+  content: attr(aria-length);
+  position: absolute;
+  top: -12px;
+  left: 15px;
+  background: var(--clr-danger);
+  height: 25px;
+  width: 25px;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 16px;
+  border-radius: 50%;
+  justify-content: center;
+}
+/* .badge {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  top: 0;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--clr-brand);
+} */
 .hamburger {
   display: none;
 }
@@ -112,6 +139,9 @@
 @media only screen and (max-width: 600px) {
   .ul,
   .header .shoppingCart {
+    display: none;
+  }
+  .shoppingCart::after {
     display: none;
   }
   .dropdown {

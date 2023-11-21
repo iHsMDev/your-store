@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./Navbar.module.css";
 const SignIn = ({ name, image }: { name: string; image: string }) => {
   const newImage = image.replaceAll("s96-c", "s192-c");
@@ -28,14 +29,16 @@ const SignIn = ({ name, image }: { name: string; image: string }) => {
         animate="animate"
         custom={1}
       >
-        <Image
-          className={styles.avatar}
-          src={newImage}
-          alt="Avatar"
-          width={50}
-          height={50}
-          sizes="100vw"
-        />
+        <Link href="/profile">
+          <Image
+            className={styles.avatar}
+            src={newImage}
+            alt="Avatar"
+            width={50}
+            height={50}
+            sizes="100vw"
+          />
+        </Link>
       </motion.div>
       <div className={styles.name}>
         <motion.p

@@ -3,7 +3,10 @@ import Navbar from "@/Components/Navbar/Navbar";
 import AuthProvider from "@/Components/Provider/AuthProvider";
 import DropDownProvider from "@/Components/Provider/DropDownProvider";
 import { Links, StoreDescription, StoreName } from "@/Data/Info";
+import { getCartLength } from "@/Server/Actions";
+import { AuthConfig } from "@/lib/Auth";
 import type { Metadata } from "next";
+import { getServerSession } from "next-auth";
 import { Tajawal } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,17 +23,20 @@ export const metadata: Metadata = {
   description: StoreDescription,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession(AuthConfig);
+  const length = (await getCartLength(session?.user?.email as string)) || 0;
+
   return (
     <html lang="en">
       <body className={tajawal.variable}>
         <AuthProvider>
           <DropDownProvider>
-            <Navbar />
+            <Navbar length={length} />
             {children}
             <Footer />
             <ToastContainer

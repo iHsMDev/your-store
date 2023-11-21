@@ -75,7 +75,7 @@ const SideBar = ({
       >
         <Image
           src={image as string}
-          alt=""
+          alt="f"
           sizes="100vw"
           width={60}
           height={60}
@@ -102,7 +102,7 @@ const SideBar = ({
       </motion.header>
       <footer className={styles.footer}>
         <motion.p variants={ani} initial="hidden" animate="animate" custom={3}>
-          المجموع {total}
+          المجموع: {total}
         </motion.p>
         <motion.button
           variants={ani}
