@@ -53,7 +53,7 @@ export const FeaturesData = [
   },
 ];
 
-import MostImage from "public/Home.svg";
+import MostImage from "public/ProductExample.svg";
 export const MostPopular = [
   {
     img: MostImage,

@@ -25,6 +25,9 @@
   background-color: var(--clr-gray);
   width: 350px;
   object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: var(--btn-radius);
   direction: ltr;
   flex: 1;
@@ -54,7 +57,7 @@
   color: var(--clr-brand);
 }
 .card img {
-  width: 100%;
+  width: 70%;
   height: 100%;
 }
 
