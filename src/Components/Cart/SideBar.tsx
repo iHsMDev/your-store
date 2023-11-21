@@ -1,6 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useRef } from "react";
+import { Flip, toast } from "react-toastify";
 import styles from "./Cart.module.css";
 const SideBar = ({
   image,
@@ -13,6 +15,7 @@ const SideBar = ({
   email?: any;
   total?: number;
 }) => {
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const ani = {
     hidden: {
       y: 25,
@@ -37,11 +40,28 @@ const SideBar = ({
       y: 0,
       scale: 0.5,
       filter: "brightness(86%)",
-
       transition: {
         delay: 0.05,
       },
     },
+  };
+
+  const dangerFn = () => {
+    setTimeout(() => {
+      if (buttonRef.current) {
+        buttonRef.current.style.background = "var(--clr-danger)";
+        buttonRef.current.setAttribute("disabled", "disabled");
+        toast.error("لا يمكنك تأكيد الدفع", {
+          transition: Flip,
+        });
+        setTimeout(() => {
+          if (buttonRef.current) {
+            buttonRef.current.style.background = "var(--clr-brand)";
+            buttonRef.current.removeAttribute("disabled");
+          }
+        }, 3000);
+      }
+    }, 0.05);
   };
 
   return (
@@ -90,6 +110,8 @@ const SideBar = ({
           animate="animate"
           whileHover="hover"
           whileTap="tap"
+          ref={buttonRef}
+          onClick={dangerFn}
           custom={4}
           className={styles.button}
         >

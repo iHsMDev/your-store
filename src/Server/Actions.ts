@@ -156,24 +156,39 @@ export const disIncrementCount = async (email: string, index: number) => {
     await connectToDB();
     const user = await User.findOne({ email: email });
     const oldCart = user.cart;
+    let oldTotal = user.total;
     let allprice = [];
-    for (let i = 0; i < user.cart.length; i++) {
-      const element = user.cart[i];
-      for (let b = 0; b < element.count; b++) {
-        allprice.push(MostPopular[element.index].price);
-      }
-    }
-    if (oldCart[index].count == 1) {
+
+    if (oldCart[index].count <= 1) {
+      let newPrice = user.total - MostPopular[oldCart[index].index].price;
+      await User.findOneAndUpdate({ email: email }, { total: newPrice });
       oldCart.splice(index, 1);
+      revalidatePath("/Cart");
     } else {
       oldCart[index].count -= 1;
-    }
+      allprice = [];
+      for (let i = 0; i < user.cart.length; i++) {
+        const element = user.cart[i];
+        for (let b = 0; b < element.count; b++) {
+          allprice.push(MostPopular[element.index].price);
+        }
+      }
 
-    const newPrice = allprice.reduce((curr, prev) => curr + prev);
+      await User.findOneAndUpdate(
+        { email: email },
+        {
+          total:
+            allprice.length >= 1
+              ? allprice.reduce((curr, prev) => curr + prev)
+              : 0,
+        }
+      );
+      revalidatePath("/Cart");
+    }
 
     return await User.findOneAndUpdate(
       { email: email },
-      { cart: oldCart, total: newPrice }
+      { cart: oldCart }
     ).then((data) => {
       revalidatePath("/Cart");
 

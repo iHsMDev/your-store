@@ -1,9 +1,8 @@
 "use client";
-import { StoreName } from "@/Data/Info";
 import { motion } from "framer-motion";
 import styles from "./Cart.module.css";
 import Item from "./Item";
-const CartItems = async ({ Items }: { Items: any }) => {
+const CartItems = ({ Items }: { Items: any }) => {
   const ani = {
     hidden: {
       y: 25,
@@ -26,7 +25,7 @@ const CartItems = async ({ Items }: { Items: any }) => {
         custom={0}
         className={styles.dataHeader}
       >
-        <h4 className={styles.storeName}>{StoreName}</h4>
+        <h4 className={styles.storeName}>صورة المنتج</h4>
         <div className={styles.dataAll}>
           <motion.p
             variants={ani}
