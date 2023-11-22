@@ -17,7 +17,7 @@ const ProfileContainer = ({ user }: { user: any }) => {
       setColor(`rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`);
     };
     color();
-  }, [user?.image]);
+  }, [userSession?.image]);
   return (
     <main
       className={styles.container}
