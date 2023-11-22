@@ -102,7 +102,7 @@ const SideBar = ({
       </motion.header>
       <footer className={styles.footer}>
         <motion.p variants={ani} initial="hidden" animate="animate" custom={3}>
-          المجموع: {total}
+          المجموع: {total} ريال
         </motion.p>
         <motion.button
           variants={ani}

@@ -37,13 +37,17 @@ export const AuthConfig: NextAuthOptions = {
       if (userFind?.name !== user?.name) {
         await User.findOneAndUpdate(
           { email: user?.email },
-          { name: user?.name }
+          {
+            name: user?.name,
+            username: user?.name?.split(" ").join("").toLowerCase(),
+          }
         );
       }
       if (!userFind) {
         await new User({
           email: user?.email,
           name: user?.name,
+          username: user?.name?.split(" ").join("").toLowerCase(),
           image: user?.image,
           platform: account?.provider,
         }).save();

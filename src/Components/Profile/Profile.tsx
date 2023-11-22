@@ -1,10 +1,11 @@
 "use client";
+import { average } from "color.js";
 import { motion } from "framer-motion";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { useEffect } from "react";
 import styles from "./Profile.module.css";
-const Profile = () => {
-  const user = useSession().data?.user;
+const Profile = ({ user }: { user: any }) => {
+
   const newImage = user?.image?.replaceAll("s96-c", "s192-c");
   const animation = {
     hidden: {
@@ -21,7 +22,7 @@ const Profile = () => {
   };
   return (
     <>
-      <header className={styles.header}>
+      <header className={styles.header} style={{}}>
         <motion.div
           variants={animation}
           initial="hidden"
@@ -42,6 +43,7 @@ const Profile = () => {
               alt="ff"
               width={100}
               height={100}
+              id="image"
             />
           </motion.div>
         </motion.div>
@@ -54,14 +56,6 @@ const Profile = () => {
             custom={2}
           >
             {user?.name}
-          </motion.p>
-          <motion.p
-            variants={animation}
-            initial="hidden"
-            animate="show"
-            custom={2}
-          >
-            {user?.email}
           </motion.p>
         </div>
       </header>

@@ -216,3 +216,14 @@ export const disIncrementCount = async (email: string, index: number) => {
     throw new Error(error.message);
   }
 };
+
+export const getProfile = async (name: string) => {
+  try {
+    await connectToDB();
+    const user = await User.findOne({ username: name });
+
+    return user || false;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};

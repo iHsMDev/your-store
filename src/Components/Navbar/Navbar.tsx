@@ -162,17 +162,15 @@ const Navbar = ({ length }: { length: number }) => {
               custom={1}
               className={styles.linebetween}
             />
-            <Link
-              href="/Cart"
-              aria-length={length}
-              className={`${styles.shoppingCart} ${length > 0 && styles.length}`}
-            >
+            <Link href="/Cart" className={`${styles.shoppingCart} `}>
               <motion.p
                 variants={LinksAnimation}
                 initial="hidden"
                 custom={3}
                 animate="animate"
                 whileHover="hover"
+                aria-length={length}
+                className={`${length > 0 && styles.length}`}
               >
                 <FiShoppingBag />
               </motion.p>
