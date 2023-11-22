@@ -1,5 +1,5 @@
 "use client";
-import { average } from "color.js";
+import { AverageColor } from "@/Functions/AverageRGB";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Reviews from "../Reviews/Reviews";
@@ -11,8 +11,10 @@ const ProfileContainer = ({ user }: { user: any }) => {
   const [color, setColor] = useState("");
   useEffect(() => {
     const color = async () => {
-      const fac = await average(user?.image as string);
-      setColor(`rgb(${fac[0]}, ${fac[1]}, ${fac[2]})`);
+      let rgb = AverageColor(document.querySelector("#image"));
+      console.log(rgb);
+
+      setColor(`rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`);
     };
     color();
   }, [user?.image]);
