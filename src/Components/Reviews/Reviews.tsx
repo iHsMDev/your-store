@@ -31,7 +31,7 @@ const Reviews = ({
         animate="show"
         className={styles.header}
       >
-        التعليقات
+        المراجعات
       </motion.header>
       <motion.section
         variants={ani}
