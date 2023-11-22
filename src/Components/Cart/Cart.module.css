@@ -46,6 +46,7 @@
   background: var(--clr-brand);
   color: white;
   border-radius: var(--btn-radius);
+  transition: background 400ms;
 }
 
 .items {
