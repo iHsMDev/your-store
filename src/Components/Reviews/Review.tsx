@@ -32,6 +32,14 @@ const Review = ({
         delay: 0.05,
       },
     },
+    hover: {
+      y: -5,
+
+      filter: "brightness(80%)",
+      transition: {
+        delay: 0.05,
+      },
+    },
   };
   return (
     <motion.div
@@ -57,7 +65,15 @@ const Review = ({
           <p className={styles.comment}>{text}</p>
         </div>
       </header>
-      <button className={styles.button}>رؤية المنتج</button>
+      <motion.button
+        variants={animation}
+        initial="hidden"
+        animate="show"
+        whileHover="hover"
+        className={styles.button}
+      >
+        رؤية المنتج
+      </motion.button>
     </motion.div>
   );
 };

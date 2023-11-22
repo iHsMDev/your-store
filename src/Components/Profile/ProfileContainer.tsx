@@ -12,7 +12,6 @@ const ProfileContainer = ({ user }: { user: any }) => {
   useEffect(() => {
     const color = async () => {
       const fac = await average(user?.image as string);
-      console.log(fac);
       setColor(`rgb(${fac[0]}, ${fac[1]}, ${fac[2]})`);
     };
     color();

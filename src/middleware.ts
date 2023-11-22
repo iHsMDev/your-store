@@ -8,7 +8,6 @@ export function middleware(request: NextRequest) {
   if (!authorized) {
     return NextResponse.redirect(new URL("/", request.url));
   }
-  console.log();
 
   return NextResponse.next();
 }

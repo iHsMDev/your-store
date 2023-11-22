@@ -43,6 +43,7 @@
 }
 .comment {
   font-size: 14px;
+  direction: rtl;
 }
 .reivewHeader {
   display: flex;

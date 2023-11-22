@@ -17,6 +17,8 @@ const LastVisitedCard = () => {
       },
     }),
     hover: {
+      y: -5,
+
       filter: "brightness(80%)",
       transition: {
         delay: 0.05,
