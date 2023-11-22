@@ -48,13 +48,17 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(17, 25, 40, 0.565);
+  border-radius: 0 0 var(--btn-radius) var(--btn-radius);
+  border: 1px solid rgba(255, 255, 255, 0.125);
   padding-inline: 25px;
   padding-block: 15px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: var(--clr-brand);
+  color: white;
 }
 .card img {
   width: 70%;
@@ -62,7 +66,7 @@
 }
 
 .name {
-  color: var(--clr-black);
+  color: white;
 }
 
 .data {
