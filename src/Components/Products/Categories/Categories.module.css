@@ -1,8 +1,8 @@
 .categories {
   display: grid;
   grid-template-areas:
-    "one two three four"
-    "five six seven seven";
+    ". . . ."
+    ". .  last last";
   gap: 25px;
   margin-bottom: 20px;
   height: 100%;
@@ -20,27 +20,9 @@
   justify-content: center;
   padding-inline: 50px;
 }
-.category:nth-child(1) {
-  grid-area: one;
-}
 
-.category:nth-child(2) {
-  grid-area: two;
-}
-.category:nth-child(3) {
-  grid-area: three;
-}
-.category:nth-child(4) {
-  grid-area: four;
-}
-.category:nth-child(5) {
-  grid-area: five;
-}
-.category:nth-child(6) {
-  grid-area: six;
-}
-.category:nth-child(7) {
-  grid-area: seven;
+.category:last-child {
+  grid-area: last;
 }
 .icon {
   display: flex;
@@ -82,10 +64,6 @@
 .firstcol {
   display: flex;
   gap: 21px;
-}
-
-.category:last-child {
-  flex: 1;
 }
 
 .image {
