@@ -1,7 +1,7 @@
 import Footer from "@/Components/Footer/Footer";
 import Navbar from "@/Components/Navbar/Navbar";
-import AuthProvider from "@/Components/Provider/AuthProvider";
-import DropDownProvider from "@/Components/Provider/DropDownProvider";
+import AuthProvider from "@/Components/Providers/AuthProvider";
+import DropDownProvider from "@/Components/Providers/DropDownProvider";
 import { Links, StoreDescription, StoreName } from "@/Data/Info";
 import { getCartLength } from "@/Server/Actions";
 import { AuthConfig } from "@/lib/Auth";

@@ -11,7 +11,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useContext } from "react";
 import { FiShoppingBag } from "react-icons/fi";
 import { RiCloseFill, RiMenu3Fill } from "react-icons/ri";
-import { Menu } from "../Provider/DropDownProvider";
+import { Menu } from "../Providers/DropDownProvider";
 import AccountSection from "./AccountSection";
 import DropDown from "./DropDown";
 import styles from "./Navbar.module.css";
