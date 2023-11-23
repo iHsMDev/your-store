@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Empty from "public/Empty.svg";
+import { useEffect } from "react";
 import styles from "./Cart.module.css";
 import Item from "./Item";
 const CartItems = ({ Items }: { Items: any }) => {
@@ -18,6 +19,9 @@ const CartItems = ({ Items }: { Items: any }) => {
       },
     }),
   };
+  useEffect(() => {
+    console.log(Items);
+  }, [Items]);
   return (
     <div className={styles.items}>
       {Items.length != 0 && (
@@ -59,11 +63,12 @@ const CartItems = ({ Items }: { Items: any }) => {
       )}
 
       {Items.length >= 1 ? (
-        Items.map((item: { index: number; count: number }, index: number) => (
+        Items.map((item: { _id: string; count: number }, index: number) => (
           <Item
             key={index}
             indexOfCart={index}
-            index={item.index}
+            index={index}
+            id={item._id}
             count={item.count}
           />
         ))

@@ -1,8 +1,20 @@
-import { MostPopular } from "@/Data/Info";
+"use client";
+
+import { getProducts } from "@/Server/Actions";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import Card from "./Card";
 import styles from "./Most.module.css";
+type productInfo = {
+  name: string;
+  _id: string;
+  img: string;
+  description: string;
+  purchases: string;
+  price: number;
+};
 const Most = () => {
+  const [products, setProducts] = useState<productInfo[]>([]);
   const animation = {
     hidden: {
       y: 25,
@@ -16,6 +28,14 @@ const Most = () => {
       },
     },
   };
+  useEffect(() => {
+    const productsFetch = async () => {
+      const prodc = await getProducts();
+
+      setProducts(prodc);
+    };
+    productsFetch();
+  }, []);
   return (
     <section className={styles.container}>
       <motion.header
@@ -31,9 +51,10 @@ const Most = () => {
       </motion.header>
 
       <div className={styles.cards}>
-        {MostPopular.map((most, index) => (
+        {products.map((most, index) => (
           <Card
             key={index}
+            _id={`${most._id}`}
             name={most.name}
             index={index}
             img={most.img}

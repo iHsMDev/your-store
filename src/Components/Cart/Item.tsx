@@ -1,22 +1,39 @@
 "use client";
-import { MostPopular } from "@/Data/Info";
+import { getProduct } from "@/Server/Actions";
 import { motion } from "framer-motion";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import Actions from "./Actions";
 import styles from "./Cart.module.css";
 
+type ItemData = {
+  _id: string;
+  name: string;
+  img: string;
+  price: number;
+};
 const Item = ({
   index,
   count,
   indexOfCart,
+  id,
 }: {
   index: number;
   count: number;
   indexOfCart: number;
+  id: string;
 }) => {
   const user = useSession();
-  const data = MostPopular[index];
+  const [data, setData] = useState<ItemData>();
+  // const data = MostPopular[index];
+  useEffect(() => {
+    const api = async () => {
+      const data = await getProduct(id);
+      setData(data);
+    };
+    api();
+  }, []);
 
   const cards = {
     hidden: {
@@ -41,12 +58,21 @@ const Item = ({
       }}
       className={styles.item}
     >
-      <div>
-        <Image className={styles.itemImage} src={data.img} alt="" />
+      <div className={styles.imgContainer}>
+        <Image
+          className={styles.itemImage}
+          src={data?.img as string}
+          alt=""
+          sizes="100vw"
+          height={500}
+          width={500}
+        />
       </div>
       <div className={styles.data}>
-        <p className={styles.itemName}>{data.name}</p>
-        <p className={styles.itemPrice}>{data.price * count}</p>
+        <p className={styles.itemName}>{data?.name}</p>
+        <p className={styles.itemPrice}>
+          {data && Math.floor(data?.price * count)}
+        </p>
         <p className={styles.itemCount}>{count}</p>
       </div>
       <Actions email={user.data?.user?.email as string} index={indexOfCart} />

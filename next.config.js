@@ -5,6 +5,12 @@ const nextConfig = {
       {
         hostname: "lh3.googleusercontent.com",
       },
+      {
+        hostname: "d2gg9evh47fn9z.cloudfront.net",
+      },
+      {
+        hostname: "fakestoreapi.com",
+      },
     ],
   },
 };

@@ -65,7 +65,12 @@ const SideBar = ({
   };
 
   return (
-    <section className={styles.sidebar}>
+    <motion.section
+      variants={ani}
+      initial="hidden"
+      animate="animate"
+      className={styles.sidebar}
+    >
       <motion.header
         variants={ani}
         initial="hidden"
@@ -102,7 +107,7 @@ const SideBar = ({
       </motion.header>
       <footer className={styles.footer}>
         <motion.p variants={ani} initial="hidden" animate="animate" custom={3}>
-          المجموع: {total} ريال
+          المجموع: {Math.floor(total as number)} ريال
         </motion.p>
         <motion.button
           variants={ani}
@@ -118,7 +123,7 @@ const SideBar = ({
           تأكيد الدفع
         </motion.button>
       </footer>
-    </section>
+    </motion.section>
   );
 };
 

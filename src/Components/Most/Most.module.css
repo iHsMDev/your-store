@@ -31,6 +31,7 @@
   border-radius: var(--btn-radius);
   direction: ltr;
   flex: 1;
+  overflow: hidden;
 }
 .button {
   padding-inline: 15px;
@@ -61,12 +62,20 @@
   color: white;
 }
 .card img {
-  width: 70%;
-  height: 100%;
+  width: auto;
+  height: 80%;
+  mix-blend-mode: multiply;
 }
 
 .name {
   color: white;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: right;
+  direction: rtl;
 }
 
 .data {
@@ -75,4 +84,20 @@
   justify-content: flex-end;
   align-items: flex-end;
   gap: 0.2em;
+}
+
+.tooltip {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(17, 25, 40, 0.565);
+  border-radius: 0 0 var(--btn-radius) var(--btn-radius);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  padding: 1rem;
+  z-index: 1;
+  color: white;
+  text-align: center;
+  border-radius: var(--btn-radius);
 }

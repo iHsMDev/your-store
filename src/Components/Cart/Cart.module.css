@@ -54,11 +54,12 @@
   flex-direction: column;
   gap: 12px;
   width: 100%;
-  padding-right: 50px;
+  padding-inline: 50px;
   height: 600px;
   overflow-x: hidden;
   overflow-y: scroll;
   margin-right: 50px;
+  direction: rtl;
 }
 .item {
   width: 100%;
@@ -68,10 +69,23 @@
   gap: 25px;
   background: var(--clr-gray);
   padding-inline: 50px;
+  padding-block: 1rem;
+
   border-radius: var(--btn-radius);
 }
+.imgContainer {
+  padding: 25px;
+  width: 100px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+
+  overflow: hidden;
+}
 .itemImage {
-  width: 50%;
+  width: auto;
+  mix-blend-mode: multiply;
+  height: 100%;
 }
 .data {
   width: 100%;

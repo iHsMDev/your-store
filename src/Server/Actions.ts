@@ -2,6 +2,8 @@
 
 import { MostPopular } from "@/Data/Info";
 import { connectToDB } from "@/utils/Database";
+import Category from "@/utils/Models/Category";
+import Product from "@/utils/Models/Product";
 import User from "@/utils/Models/Users";
 import { revalidatePath } from "next/cache";
 const descDefault = {
@@ -22,7 +24,7 @@ export const getCartLength = async (email: string) => {
     throw new Error(error.message);
   }
 };
-export const AddToCart = async (index: number, email: string, carts?: []) => {
+export const AddToCart = async (index: string, email: string, carts?: []) => {
   try {
     await connectToDB();
     const user = await User.findOne({ email: email });
@@ -33,18 +35,18 @@ export const AddToCart = async (index: number, email: string, carts?: []) => {
         desc: descDefault,
       };
     }
-    const oldCart: [{ index: number; count: number }] = user.cart;
-    const order = MostPopular[index];
+    const oldCart: [{ _id: string; count: number }] = user.cart;
+    const order = await Product.findById(index);
 
     const newPrice = (user.total += order.price);
-    if (oldCart.find((data) => data.index === index)) {
+    if (oldCart.find((data) => data._id === index)) {
       return {
         message: "المنتج متواجد في السلة بالفعل",
         desc: descDefault,
         ok: false,
       };
     }
-    oldCart.push({ index: index, count: 1 });
+    oldCart.push({ _id: index, count: 1 });
 
     return await User.findOneAndUpdate(
       { email: email },
@@ -56,7 +58,7 @@ export const AddToCart = async (index: number, email: string, carts?: []) => {
       for (let i = 0; i < user.cart.length; i++) {
         const element = user.cart[i];
         for (let b = 0; b < element.count; b++) {
-          allprice.push(MostPopular[element.index].price);
+          allprice.push(order.price);
         }
       }
       await User.findOneAndUpdate(
@@ -65,7 +67,7 @@ export const AddToCart = async (index: number, email: string, carts?: []) => {
       );
       return {
         message: "تم اضافة المنتج بنجاح",
-        desc: { ...order },
+        desc: order,
         ok: true,
       };
     });
@@ -78,6 +80,57 @@ export const AddToCart = async (index: number, email: string, carts?: []) => {
   }
 };
 
+type ProductData = {
+  name: string;
+  _id: string;
+  img: string;
+  description: string;
+  purchases: string;
+  price: number;
+};
+export const getProducts = async () => {
+  try {
+    await connectToDB();
+    let data = await Product.find();
+    let cards: ProductData[] = [];
+
+    data.forEach((d, i) => {
+      cards.push({
+        name: d.name,
+        _id: `${d._id}`,
+        img: d.img,
+        description: d.description,
+        purchases: d.purchases,
+        price: d.price,
+      });
+    });
+
+    return cards;
+  } catch (error: any) {
+    throw Error(error.message);
+  }
+};
+
+export const getProduct = async (_id: string) => {
+  try {
+    await connectToDB();
+    let d = await Product.findById(_id);
+    let cards: ProductData;
+
+    cards = {
+      name: d.name,
+      _id: `${d._id}`,
+      img: d.img,
+      description: d.description,
+      purchases: d.purchases,
+      price: d.price,
+    };
+
+    return cards;
+  } catch (error: any) {
+    throw Error(error.message);
+  }
+};
 export const getTotal = async (email: string) => {
   try {
     await connectToDB();
@@ -95,9 +148,7 @@ export const getItemsFromCart = async (email: string) => {
   try {
     await connectToDB();
     const user = await User.findOne({ email: email });
-    if (user) {
-      return user.cart;
-    }
+    return user.cart;
   } catch (error: any) {
     throw new Error(error.message);
   }
@@ -236,5 +287,23 @@ export const getProfile = async (name: string) => {
     );
   } catch (error: any) {
     throw new Error(error.message);
+  }
+};
+
+export const getCategories = async () => {
+  try {
+    await connectToDB();
+    return await Category.find();
+  } catch (error: any) {
+    throw Error(error.message);
+  }
+};
+
+export const getProductsLengthOfCategory = async (name: string) => {
+  try {
+    await connectToDB();
+    return (await Product.find({ category: name })).length;
+  } catch (error: any) {
+    throw Error(error.message);
   }
 };

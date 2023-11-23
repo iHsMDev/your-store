@@ -1,3 +1,5 @@
+"use client";
+
 import { FeaturesData } from "@/Data/Info";
 import { motion } from "framer-motion";
 import Image from "next/image";
