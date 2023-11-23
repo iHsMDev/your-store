@@ -4,9 +4,12 @@ import { AuthConfig } from "@/lib/Auth";
 import { getServerSession } from "next-auth";
 import { notFound, redirect } from "next/navigation";
 const page = async ({ params }: { params: { name: string } }) => {
-  const user = await getProfile(params.name.replace("%40", ""));
+  const profile = await getProfile(params.name.replace("%40", ""));
+  const user = profile?.user;
+  const message = profile?.message;
+
   const logged = await getServerSession(AuthConfig);
-  if (!user) {
+  if (!message) {
     notFound();
   }
   if (user.email === logged?.user?.email) {

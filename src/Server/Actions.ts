@@ -220,9 +220,20 @@ export const disIncrementCount = async (email: string, index: number) => {
 export const getProfile = async (name: string) => {
   try {
     await connectToDB();
-    const user = await User.findOne({ username: name });
+    const user = await User.findOne({ username: name }).select("-_id ");
 
-    return user || false;
+    return (
+      {
+        message: true,
+        user: {
+          name: user.name,
+          email: user.email,
+          image: user.image,
+        },
+      } || {
+        message: false,
+      }
+    );
   } catch (error: any) {
     throw new Error(error.message);
   }

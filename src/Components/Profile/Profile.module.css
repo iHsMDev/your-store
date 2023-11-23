@@ -21,7 +21,7 @@
   position: relative;
   width: 100%;
   height: 200px;
-  background-color: var(--clr-brand);
+  background-color: var(--clr-profile);
   border-radius: var(--btn-radius);
 }
 .avatar {
@@ -71,7 +71,7 @@
   padding-inline: 20px;
   padding-block: 10px;
   border: none;
-  background: var(--clr-brand);
+  background: var(--clr-profile);
   color: white;
   cursor: pointer;
   border-radius: var(--btn-radius);
@@ -84,7 +84,7 @@
 .badge {
   height: 25px;
   width: 25px;
-  background: var(--clr-brand);
+  background: var(--clr-profile);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -115,7 +115,7 @@
   padding-block: 10px;
   font-size: 0.8rem;
   border: none;
-  background: var(--clr-brand);
+  background: var(--clr-profile);
   color: white;
   cursor: pointer;
   border-radius: var(--btn-radius);

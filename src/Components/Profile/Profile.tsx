@@ -1,11 +1,8 @@
 "use client";
-import { average } from "color.js";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useEffect } from "react";
 import styles from "./Profile.module.css";
 const Profile = ({ user }: { user: any }) => {
-
   const newImage = user?.image?.replaceAll("s96-c", "s192-c");
   const animation = {
     hidden: {
@@ -20,9 +17,10 @@ const Profile = ({ user }: { user: any }) => {
       },
     }),
   };
+
   return (
     <>
-      <header className={styles.header} style={{}}>
+      <header className={styles.header}>
         <motion.div
           variants={animation}
           initial="hidden"
