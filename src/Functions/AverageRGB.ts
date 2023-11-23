@@ -11,7 +11,7 @@ export const AverageColor = (imgSrc: any) => {
       resolve("");
 
       ctx.drawImage(img, 0, 0, 1, 1);
-    }, 1000);
+    }, 200);
   }).then(() => {
     return ctx.getImageData(0, 0, 1, 1).data.slice(0, 3);
   });
