@@ -4,7 +4,6 @@ export const AverageColor = (imgSrc: any) => {
   let img = new Image();
   img.setAttribute("crossOrigin", "anonymous");
   img.src = imgSrc;
-  console.log(img);
 
   return new Promise((resolve, reject) => {
     const haha = setInterval(() => {
