@@ -8,8 +8,8 @@ import SideBar from "./SideBar";
 
 const Cart = async () => {
   const session = await getServerSession(AuthConfig);
-  const items = await getItemsFromCart(session?.user?.email as string);
   const total = await getTotal(session?.user?.email as string);
+  const items = await getItemsFromCart(session?.user?.email as string);
   return (
     <div className={styles.cartContainer}>
       <SideBar {...session?.user} total={total} />

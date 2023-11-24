@@ -26,14 +26,13 @@ const Item = ({
 }) => {
   const user = useSession();
   const [data, setData] = useState<ItemData>();
-  // const data = MostPopular[index];
   useEffect(() => {
     const api = async () => {
       const data = await getProduct(id);
       setData(data);
     };
     api();
-  }, []);
+  }, [id]);
 
   const cards = {
     hidden: {
@@ -75,7 +74,10 @@ const Item = ({
         </p>
         <p className={styles.itemCount}>{count}</p>
       </div>
-      <Actions email={user.data?.user?.email as string} index={indexOfCart} />
+      <Actions
+        email={user.data?.user?.email as string}
+        id={data?._id as string}
+      />
     </motion.div>
   );
 };

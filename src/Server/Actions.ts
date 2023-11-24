@@ -1,6 +1,5 @@
 "use server";
 
-import { MostPopular } from "@/Data/Info";
 import { connectToDB } from "@/utils/Database";
 import Category from "@/utils/Models/Category";
 import Product from "@/utils/Models/Product";
@@ -38,7 +37,6 @@ export const AddToCart = async (index: string, email: string, carts?: []) => {
     const oldCart: [{ _id: string; count: number }] = user.cart;
     const order = await Product.findById(index);
 
-    const newPrice = (user.total += order.price);
     if (oldCart.find((data) => data._id === index)) {
       return {
         message: "المنتج متواجد في السلة بالفعل",
@@ -54,16 +52,10 @@ export const AddToCart = async (index: string, email: string, carts?: []) => {
     ).then(async () => {
       revalidatePath("/Cart", "layout");
       revalidatePath("/");
-      let allprice = [];
-      for (let i = 0; i < user.cart.length; i++) {
-        const element = user.cart[i];
-        for (let b = 0; b < element.count; b++) {
-          allprice.push(order.price);
-        }
-      }
+
       await User.findOneAndUpdate(
         { email: email },
-        { total: allprice.reduce((c, p) => c + p) }
+        { total: (user.total += order.price) }
       );
       return {
         message: "تم اضافة المنتج بنجاح",
@@ -131,6 +123,7 @@ export const getProduct = async (_id: string) => {
     throw Error(error.message);
   }
 };
+
 export const getTotal = async (email: string) => {
   try {
     await connectToDB();
@@ -154,12 +147,13 @@ export const getItemsFromCart = async (email: string) => {
   }
 };
 
-export const IncrementCount = async (email: string, index: number) => {
+export const IncrementCount = async (email: string, id: string) => {
   try {
     await connectToDB();
     const user = await User.findOne({ email: email });
     const oldCart = user.cart;
-
+    const item = await Product.findById(id);
+    const index = oldCart.findIndex((item: { _id: string }) => item._id === id);
     oldCart[index].count += 1;
 
     return await User.findOneAndUpdate(
@@ -170,8 +164,9 @@ export const IncrementCount = async (email: string, index: number) => {
       let allprice = [];
       for (let i = 0; i < user.cart.length; i++) {
         const element = user.cart[i];
+        const newItem = await Product.findById(element._id);
         for (let b = 0; b < element.count; b++) {
-          allprice.push(MostPopular[element.index].price);
+          allprice.push(newItem.price);
         }
       }
       await User.findOneAndUpdate(
@@ -187,23 +182,30 @@ export const IncrementCount = async (email: string, index: number) => {
   }
 };
 
-export const DeleteItem = async (email: string, index: number) => {
+export const DeleteItem = async (email: string, id: string) => {
   try {
     await connectToDB();
     const user = await User.findOne({ email: email });
     const oldCart = user.cart;
-
+    const item = await Product.findById(id);
+    const index = oldCart.findIndex((item: { _id: string }) => item._id === id);
+    const newItem = oldCart.find((item: { _id: string }) => item._id === id);
     let allprice = [];
-    oldCart.splice(index, 1);
-    for (let i = 0; i < user.cart.length; i++) {
-      const element = user.cart[i];
-      for (let b = 0; b < element.count; b++) {
-        allprice.push(MostPopular[element.index].price);
-      }
+    console.log();
+
+    for (let b = 0; b < newItem.count; b++) {
+      console.log("t");
+
+      allprice.push(item.price);
     }
+    console.log(allprice);
+
+    oldCart.splice(index, 1);
 
     const newPrice =
-      allprice.length >= 1 ? allprice.reduce((curr, prev) => curr + prev) : 0;
+      allprice.length != 0
+        ? (user.total -= allprice.reduce((prev, curr) => prev + curr))
+        : 0;
     return await User.findOneAndUpdate(
       { email: email },
       { cart: oldCart, total: newPrice }
@@ -218,16 +220,20 @@ export const DeleteItem = async (email: string, index: number) => {
     throw new Error(error.message);
   }
 };
-export const disIncrementCount = async (email: string, index: number) => {
+
+export const disIncrementCount = async (email: string, id: string) => {
   try {
     await connectToDB();
     const user = await User.findOne({ email: email });
+
     const oldCart = user.cart;
+    const item = await Product.findById(id);
+    const index = oldCart.findIndex((item: { _id: string }) => item._id === id);
     let oldTotal = user.total;
     let allprice = [];
 
     if (oldCart[index].count <= 1) {
-      let newPrice = user.total - MostPopular[oldCart[index].index].price;
+      let newPrice = user.total - item.price;
       await User.findOneAndUpdate({ email: email }, { total: newPrice });
       oldCart.splice(index, 1);
       revalidatePath("/Cart");
@@ -237,7 +243,9 @@ export const disIncrementCount = async (email: string, index: number) => {
       for (let i = 0; i < user.cart.length; i++) {
         const element = user.cart[i];
         for (let b = 0; b < element.count; b++) {
-          allprice.push(MostPopular[element.index].price);
+          const prod = await Product.findById(element._id);
+
+          allprice.push(prod.price);
         }
       }
 

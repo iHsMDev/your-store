@@ -2,7 +2,6 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Empty from "public/Empty.svg";
-import { useEffect } from "react";
 import styles from "./Cart.module.css";
 import Item from "./Item";
 const CartItems = ({ Items }: { Items: any }) => {
@@ -19,9 +18,7 @@ const CartItems = ({ Items }: { Items: any }) => {
       },
     }),
   };
-  useEffect(() => {
-    console.log(Items);
-  }, [Items]);
+
   return (
     <div className={styles.items}>
       {Items.length != 0 && (

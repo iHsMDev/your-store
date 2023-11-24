@@ -1,13 +1,17 @@
-import {
-  DeleteItem,
-  IncrementCount,
-  disIncrementCount,
-} from "@/Server/Actions";
+import { DeleteItem, IncrementCount, disIncrementCount } from "@/Server/Actions";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { FiMinus, FiPlus, FiTrash2 } from "react-icons/fi";
 import styles from "./Cart.module.css";
-const Actions = ({ email, index }: { email: string; index: number }) => {
+const Actions = ({
+  email,
+
+  id,
+}: {
+  email: string;
+
+  id: string;
+}) => {
   const router = useRouter();
 
   const buttons = {
@@ -49,7 +53,7 @@ const Actions = ({ email, index }: { email: string; index: number }) => {
         whileTap="tap"
         custom={0}
         className={styles.addCount}
-        onClick={() => IncrementCount(email, index)}
+        onClick={() => IncrementCount(email, id)}
       >
         <FiPlus />
       </motion.div>
@@ -61,7 +65,7 @@ const Actions = ({ email, index }: { email: string; index: number }) => {
         whileTap="tap"
         custom={1}
         className={styles.removeCount}
-        onClick={() => disIncrementCount(email, index)}
+        onClick={() => disIncrementCount(email, id)}
       >
         <FiMinus />
       </motion.div>
@@ -73,7 +77,7 @@ const Actions = ({ email, index }: { email: string; index: number }) => {
         whileTap="tap"
         custom={2}
         className={styles.Delete}
-        onClick={() => DeleteItem(email, index)}
+        onClick={() => DeleteItem(email, id)}
       >
         <FiTrash2 />
       </motion.div>
