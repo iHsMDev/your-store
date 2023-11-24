@@ -2,8 +2,10 @@ export const AverageColor = (imgSrc: any) => {
   var canvas: any = document.createElement("canvas");
   let ctx = canvas.getContext("2d");
   let img = new Image();
-  img.setAttribute("crossOrigin", "");
+  img.setAttribute("crossOrigin", "anonymous");
   img.src = imgSrc;
+  console.log(img);
+
   return new Promise((resolve, reject) => {
     const haha = setInterval(() => {
       if (img) {
