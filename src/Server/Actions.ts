@@ -191,14 +191,10 @@ export const DeleteItem = async (email: string, id: string) => {
     const index = oldCart.findIndex((item: { _id: string }) => item._id === id);
     const newItem = oldCart.find((item: { _id: string }) => item._id === id);
     let allprice = [];
-    console.log();
 
     for (let b = 0; b < newItem.count; b++) {
-      console.log("t");
-
       allprice.push(item.price);
     }
-    console.log(allprice);
 
     oldCart.splice(index, 1);
 

@@ -12,7 +12,7 @@ const Cart = async () => {
   const items = await getItemsFromCart(session?.user?.email as string);
   return (
     <div className={styles.cartContainer}>
-      <SideBar {...session?.user} total={total} />
+      {items.length != 0 && <SideBar {...session?.user} total={total} />}
 
       <Suspense fallback={<h1>Loading..</h1>}>
         <CartItems Items={items ? items : []} />
