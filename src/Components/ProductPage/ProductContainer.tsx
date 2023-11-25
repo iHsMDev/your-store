@@ -6,6 +6,7 @@ type ProductData = {
   description: string;
   purchases: string;
   price: number;
+  category: string;
   reviews: any;
 };
 import { motion } from "framer-motion";
@@ -99,6 +100,14 @@ const ProductContainer = (props: ProductData) => {
             className={styles.desc}
           >
             {props.description}
+          </motion.p>
+          <motion.p
+            variants={dataAniamtion}
+            initial="hidden"
+            whileInView="animate"
+            custom={2}
+          >
+            القسم: {props.category}
           </motion.p>
 
           <section className={styles.addToCartButton}>

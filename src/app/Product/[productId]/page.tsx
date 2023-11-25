@@ -1,5 +1,5 @@
 import ProductContainer from "@/Components/ProductPage/ProductContainer";
-import { getProduct, getReviews } from "@/Server/Actions";
+import { getCategoryName, getProduct, getReviews } from "@/Server/Actions";
 import { notFound } from "next/navigation";
 
 type ProductParams = {
@@ -13,7 +13,11 @@ const page = async ({ params }: ProductParams) => {
     const reviews = await getReviews(id);
     const data = await getProduct(id);
 
-    return <ProductContainer reviews={reviews} {...data} />;
+    const category = await getCategoryName(data.category);
+
+    return (
+      <ProductContainer reviews={reviews} {...data} category={category.name} />
+    );
   } catch (error) {
     notFound();
   }

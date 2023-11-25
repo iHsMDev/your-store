@@ -20,7 +20,13 @@ const CartItems = ({ Items }: { Items: any }) => {
   };
 
   return (
-    <div className={styles.items}>
+    <motion.section
+      variants={ani}
+      initial="hidden"
+      animate="animate"
+      custom={0}
+      className={styles.items}
+    >
       {Items.length != 0 && (
         <motion.header
           variants={ani}
@@ -88,7 +94,7 @@ const CartItems = ({ Items }: { Items: any }) => {
           </motion.p>
         </motion.section>
       )}
-    </div>
+    </motion.section>
   );
 };
 

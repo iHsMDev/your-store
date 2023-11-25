@@ -80,6 +80,7 @@ type ProductData = {
   description: string;
   purchases: string;
   price: number;
+  category: string;
 };
 export const getProducts = async () => {
   try {
@@ -95,6 +96,7 @@ export const getProducts = async () => {
         description: d.description,
         purchases: d.purchases,
         price: d.price,
+        category: d.category,
       });
     });
 
@@ -109,6 +111,7 @@ export const getProduct = async (_id: string) => {
     await connectToDB();
     let d = await Product.findById(_id);
     let cards: ProductData;
+    let category = d.category;
 
     cards = {
       name: d.name,
@@ -117,6 +120,7 @@ export const getProduct = async (_id: string) => {
       description: d.description,
       purchases: d.purchases,
       price: d.price,
+      category: d.category,
     };
 
     return cards;
@@ -134,7 +138,7 @@ export const getTotal = async (email: string) => {
     }
     return user.total;
   } catch (error: any) {
-    throw new Error(error.message);
+    return 0;
   }
 };
 
@@ -144,7 +148,7 @@ export const getItemsFromCart = async (email: string) => {
     const user = await User.findOne({ email: email });
     return user.cart;
   } catch (error: any) {
-    throw new Error(error.message);
+    return [];
   }
 };
 

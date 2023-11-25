@@ -70,7 +70,7 @@ const Item = ({
       <div className={styles.data}>
         <p className={styles.itemName}>{data?.name}</p>
         <p className={styles.itemPrice}>
-          {data && Math.floor(data?.price * count)}
+          {data && Math.floor(data?.price * count)} ريال
         </p>
       </div>
       <Actions
