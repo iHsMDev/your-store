@@ -3,6 +3,7 @@
 import { connectToDB } from "@/utils/Database";
 import Category from "@/utils/Models/Category";
 import Product from "@/utils/Models/Product";
+import Review from "@/utils/Models/Review";
 import User from "@/utils/Models/Users";
 import { revalidatePath } from "next/cache";
 const descDefault = {
@@ -294,6 +295,20 @@ export const getProfile = async (name: string) => {
   }
 };
 
+export const getProfileFromEmail = async (email: string) => {
+  try {
+    await connectToDB();
+    const user = await User.findOne({ email: email }).select("-_id ");
+
+    return {
+      name: user.name,
+      image: user.image,
+    };
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
 export const getCategories = async () => {
   try {
     await connectToDB();
@@ -309,5 +324,93 @@ export const getProductsLengthOfCategory = async (name: string) => {
     return (await Product.find({ category: name })).length;
   } catch (error: any) {
     throw Error(error.message);
+  }
+};
+
+import moment from "moment";
+export const sendReview = async (form: FormData) => {
+  try {
+    await connectToDB();
+    let productId = form.get("productId");
+    let text = form.get("text");
+    let email = form.get("userEmail");
+    const userFound = await User.findOne({ email: email });
+    if (!userFound) {
+      return null;
+    }
+    await new Review({
+      productId: productId,
+      text: text,
+      user: email,
+      createdAt: moment(),
+    }).save();
+    revalidatePath(`/Product/${productId}`);
+    return { message: "تم ارسال المراجعة", ok: true };
+  } catch (error: any) {
+    return { message: "Failed to create", ok: false };
+  }
+};
+
+export const deleteReview = async (id: string, productId: string) => {
+  try {
+    await connectToDB();
+
+    await Review.findByIdAndDelete(id);
+
+    revalidatePath(`/Product/${productId}`);
+    return { message: "تم حذف المراجعة", ok: true };
+  } catch (error: any) {
+    return { message: error.message, ok: false };
+  }
+};
+export const getReviews = async (id: string) => {
+  try {
+    await connectToDB();
+    const reviews = await Review.find({ productId: id });
+    let newArr = [];
+
+    for (let i = 0; i < reviews.length; i++) {
+      const element = reviews[i];
+      const img = (await getProfileFromEmail(element.user)).image;
+
+      newArr.push({
+        user: element.user,
+        _id: element._id,
+        productId: element.productId,
+        createdAt: element.createdAt,
+        text: element.text,
+        image: img,
+      });
+    }
+
+    return newArr;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
+export const getProfileReviews = async (email: string) => {
+  try {
+    await connectToDB();
+    const reviews = await Review.find({ user: email });
+    let newArr = [];
+
+    for (let i = 0; i < reviews.length; i++) {
+      const element = reviews[i];
+      const img = (await getProfileFromEmail(element.user)).image;
+
+      newArr.push({
+        user: element.user,
+        _id: element._id,
+        productId: element.productId,
+        createdAt: element.createdAt,
+        text: element.text,
+        image: img,
+      });
+    }
+
+    return newArr;
+  } catch (error: any) {
+    throw new Error(error.message);
   }
 };

@@ -10,7 +10,11 @@ export const AverageColor = (imgSrc: any) => {
       if (img) {
         setTimeout(() => {
           resolve("");
-          ctx.drawImage(img, 0, 0, 1, 1);
+          try {
+            ctx.drawImage(img, 0, 0, 1, 1);
+          } catch (error) {
+            return;
+          }
           clearInterval(haha);
         }, 500);
       }

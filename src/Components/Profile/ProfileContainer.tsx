@@ -7,7 +7,7 @@ import Profile from "./Profile";
 import styles from "./Profile.module.css";
 import SideBar from "./SideBar";
 export const Load = createContext<any>(false);
-const ProfileContainer = ({ user }: { user: any }) => {
+const ProfileContainer = ({ user, reviews }: { user: any; reviews: any }) => {
   const userSession = useSession().data?.user;
   const [color, setColor] = useState("");
   useEffect(() => {
@@ -35,11 +35,7 @@ const ProfileContainer = ({ user }: { user: any }) => {
             {userSession?.email == user.email && (
               <SideBar email={user?.email} />
             )}
-            <Reviews
-              email={user?.email as string}
-              image={user?.image as string}
-              name={user?.name as string}
-            />
+            <Reviews reviews={reviews} />
           </div>
         </>
       )}

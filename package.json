@@ -13,6 +13,7 @@
     "color.js": "^1.2.0",
     "fast-average-color": "^9.4.0",
     "framer-motion": "^10.16.5",
+    "moment": "^2.29.4",
     "mongoose": "^8.0.1",
     "next": "14.0.3",
     "next-auth": "^4.24.5",

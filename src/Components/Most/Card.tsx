@@ -1,11 +1,9 @@
-import { AddToCart } from "@/Server/Actions";
 import { motion } from "framer-motion";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { TbShoppingCartPlus } from "react-icons/tb";
-import { Flip, toast } from "react-toastify";
 import styles from "./Most.module.css";
 
 const Card = ({
@@ -85,32 +83,7 @@ const Card = ({
     },
   };
   const user = useSession().data?.user;
-  const Cart = async () => {
-    const response = AddToCart(_id, user?.email as string);
-    const { message, desc, ok } = await response;
-    const loading = toast.loading("لحظة واحدة...", {
-      transition: Flip,
-    });
-    toast.dismiss(loading);
 
-    setTimeout(() => {
-      toast(
-        `${message} ${
-          desc.name && "|" + desc.name + " " + Math.floor(desc.price)
-        }`,
-        {
-          type: ok ? "success" : "error",
-          isLoading: false,
-          transition: Flip,
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeButton: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-        }
-      );
-    }, 500);
-  };
   return (
     <motion.div
       variants={cardsAnimation}
@@ -132,17 +105,18 @@ const Card = ({
       </motion.span>
       <Image src={img} alt="." sizes="100vw" height={100} width={100} />
       <div className={styles.price}>
-        <motion.button
-          variants={dataAniamtion}
-          initial="hidden"
-          whileInView="animate"
-          whileHover="hoverd"
-          custom={5}
-          onClick={() => Cart()}
-          className={`${styles.button} button`}
-        >
-          <TbShoppingCartPlus /> أضف إلى السلة
-        </motion.button>
+        <Link href={`/Product/${_id}`}>
+          <motion.button
+            variants={dataAniamtion}
+            initial="hidden"
+            whileInView="animate"
+            whileHover="hoverd"
+            custom={5}
+            className={`${styles.button} button`}
+          >
+            معلومات المنتج
+          </motion.button>
+        </Link>
         <div className={styles.data}>
           <motion.p
             variants={dataAniamtion}
