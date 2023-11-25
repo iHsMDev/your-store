@@ -104,7 +104,7 @@ const Review = ({
 
   useEffect(() => {
     setfromNow(moment(createdAt).fromNow());
-  }, [user]);
+  }, [user, createdAt]);
   return (
     <motion.div
       variants={animation}
