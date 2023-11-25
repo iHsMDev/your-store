@@ -12,3 +12,16 @@
 .card:last-child {
   flex: 1;
 }
+
+@media only screen and (max-width: 768px) {
+  .cards {
+    display: flex;
+    flex-direction: column;
+  }
+  .card {
+    height: 700px !important;
+  }
+}
+
+@media only screen and (max-width: 1025px) {
+}

@@ -133,3 +133,20 @@
   background: var(--clr-gray);
   border-radius: var(--btn-radius);
 }
+
+@media only screen and (max-width: 768px) {
+  .nameAndDate {
+    font-size: 0.8rem;
+  }
+  .between {
+    display: none;
+  }
+  .comment {
+    width: 100px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline;
+    height: 100%;
+    direction: rtl;
+  }
+}

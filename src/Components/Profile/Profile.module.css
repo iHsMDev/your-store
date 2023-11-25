@@ -154,3 +154,20 @@
   width: 70px;
   height: auto;
 }
+
+@media only screen and (max-width: 768px) {
+  .container {
+    padding-inline: 25px;
+  }
+  .name {
+    left: 1rem !important;
+    right: unset !important;
+  }
+  .ProfileData {
+    flex-direction: column-reverse;
+  }
+  .sidebarContainer {
+    padding-right: 20px;
+    width: 100% !important;
+  }
+}

@@ -44,6 +44,36 @@
   color: var(--clr-black);
 }
 
+@media only screen and (max-width: 1025px) {
+  .vector {
+    width: 100vw;
+  }
+  .texts {
+    align-items: center;
+  }
+  .header {
+    font-size: 3.5rem;
+  }
+  .paragraph {
+    font-size: 2rem;
+  }
+  .btn {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (max-width: 541px) {
+  .header {
+    font-size: 2rem;
+  }
+  .paragraph {
+    font-size: 1.5rem;
+  }
+  .btn {
+    font-size: 1rem;
+  }
+}
+
 @media only screen and (max-width: 900px) {
   .vector {
     width: 100vw;

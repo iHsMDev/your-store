@@ -30,6 +30,16 @@ const page = async ({ params }: ParamsTypes) => {
               price={most.price}
             />
           ))}
+          {products.map((most, index) => (
+            <Card
+              key={index}
+              _id={`${most._id}`}
+              name={most.name}
+              index={index}
+              img={most.img}
+              price={most.price}
+            />
+          ))}
         </section>
         <BackButton href="/Products" />
       </main>

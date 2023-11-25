@@ -33,6 +33,21 @@
   padding-inline: 1rem;
 }
 
+@media only screen and (max-width: 768px) {
+  .product {
+    display: flex;
+    flex-direction: column;
+  }
+  .productImage {
+    width: 100% !important;
+  }
+  .container {
+    padding-inline: 25px;
+  }
+  .desc {
+    width: 100% !important;
+  }
+}
 .addToCartButton {
   display: flex;
   align-items: center;

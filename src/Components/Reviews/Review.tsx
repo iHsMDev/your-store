@@ -129,7 +129,7 @@ const Review = ({
         <div className={styles.data}>
           <div className={styles.nameAndDate}>
             <p className={styles.date}>{fromNow}</p>
-            <p>-</p>
+            <p className={styles.between}>-</p>
             <p>{name}</p>
           </div>
           <p className={styles.comment}>{text}</p>

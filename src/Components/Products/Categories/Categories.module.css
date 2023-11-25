@@ -81,3 +81,36 @@
   display: flex;
   gap: 21px;
 }
+
+@media only screen and (max-width: 768px) {
+  .categories {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+  }
+  .category {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1025px) {
+  .categories {
+    display: grid;
+    grid-template-areas:
+      ". ."
+      ". ."
+      ". ."
+      "last last";
+
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 541px) {
+  .categories {
+    display: grid;
+    grid-template-areas: "." "last";
+
+    width: 100%;
+  }
+}

@@ -10,3 +10,26 @@
   flex-direction: column;
   gap: 33px;
 }
+@media only screen and (max-width: 768px) {
+  .section {
+    width: 100%;
+    padding-inline: 1rem;
+  }
+  .container {
+    padding-inline: 0;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1025px) {
+  .section {
+    width: 100%;
+    padding-inline: 1rem;
+  }
+  .container {
+    flex-direction: column;
+    padding-inline: 0;
+  }
+}

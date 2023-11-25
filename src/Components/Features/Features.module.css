@@ -1,5 +1,5 @@
 .container {
-  height: 500px;
+  min-height: 500px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -50,4 +50,29 @@
   background: var(--clr-brand-darker);
   color: white;
   border-radius: var(--btn-radius);
+}
+
+@media only screen and (max-width: 1025px) {
+  .container {
+    padding-inline: 50px;
+  }
+  .cards {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .card {
+    width: 300px;
+    font-size: 1.5rem;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .container {
+    padding-block: 50px;
+  }
+  .cards {
+    grid-template-columns: 1fr !important;
+  }
+  .card {
+    width: 250px !important;
+    font-size: 1rem !important;
+  }
 }

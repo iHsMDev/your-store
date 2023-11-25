@@ -26,3 +26,17 @@
   padding-inline: 180px;
   width: 100%;
 }
+
+@media only screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding-inline: 0;
+  }
+}
+
+@media only screen and (max-width: 1025px) {
+  .container {
+    flex-direction: column;
+    padding-inline: 0;
+  }
+}

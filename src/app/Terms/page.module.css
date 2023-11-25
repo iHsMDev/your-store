@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-inline: 50px;
+  min-height: 100dvh;
+  align-items: flex-end;
+}
+
+.terms {
+  padding-left: 50px;
+  direction: rtl;
+  font-size: 1.5rem;
+  color: rgba(97, 97, 97, 0.733);
+}
