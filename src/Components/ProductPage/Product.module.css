@@ -84,6 +84,7 @@
 }
 .img {
   mix-blend-mode: multiply;
+  width: auto;
 }
 
 .reviewsContainer {

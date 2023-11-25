@@ -93,6 +93,7 @@ const Review = ({
     },
   };
   const [name, setName] = useState("");
+  const [fromNow, setfromNow] = useState(moment(createdAt).fromNow());
   useEffect(() => {
     const api = async () => {
       const data = await getProfileFromEmail(userEmail);
@@ -100,6 +101,10 @@ const Review = ({
     };
     api();
   }, [userEmail]);
+
+  useEffect(() => {
+    setfromNow(moment(createdAt).fromNow());
+  }, [user]);
   return (
     <motion.div
       variants={animation}
@@ -112,12 +117,18 @@ const Review = ({
       className={styles.review}
     >
       <header className={styles.reivewHeader}>
-        <Link href={`/profile/${name.split(" ").join("").toLocaleLowerCase()}`}>
+        <Link
+          href={
+            user?.name !== name
+              ? `/profile/${name.split(" ").join("").toLocaleLowerCase()}`
+              : "/profile"
+          }
+        >
           <ReviewImage image={image} />
         </Link>
         <div className={styles.data}>
           <div className={styles.nameAndDate}>
-            <p className={styles.date}>{moment(createdAt).fromNow()}</p>
+            <p className={styles.date}>{fromNow}</p>
             <p>-</p>
             <p>{name}</p>
           </div>

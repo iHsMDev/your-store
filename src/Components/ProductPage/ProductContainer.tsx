@@ -29,21 +29,16 @@ const ProductContainer = (props: ProductData) => {
     toast.dismiss(loading);
 
     setTimeout(() => {
-      toast(
-        `${message} ${
-          desc.name && "|" + desc.name + " " + Math.floor(desc.price)
-        }`,
-        {
-          type: ok ? "success" : "error",
-          isLoading: false,
-          transition: Flip,
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeButton: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-        }
-      );
+      toast(message, {
+        type: ok ? "success" : "error",
+        isLoading: false,
+        transition: Flip,
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeButton: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
     }, 500);
   };
 

@@ -121,7 +121,8 @@
 
 .actions {
   display: flex;
-  gap: 25px;
+  align-items: center;
+  gap: 1rem;
 }
 
 .actions > div {

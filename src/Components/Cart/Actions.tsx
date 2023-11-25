@@ -1,15 +1,19 @@
-import { DeleteItem, IncrementCount, disIncrementCount } from "@/Server/Actions";
+import {
+  DeleteItem,
+  IncrementCount,
+  disIncrementCount,
+} from "@/Server/Actions";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { FiMinus, FiPlus, FiTrash2 } from "react-icons/fi";
 import styles from "./Cart.module.css";
 const Actions = ({
   email,
-
+  count,
   id,
 }: {
   email: string;
-
+  count: number;
   id: string;
 }) => {
   const router = useRouter();
@@ -57,6 +61,7 @@ const Actions = ({
       >
         <FiPlus />
       </motion.div>
+      (<p className={styles.itemCount}>{count}</p>)
       <motion.div
         variants={buttons}
         initial="hidden"

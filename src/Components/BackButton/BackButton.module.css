@@ -1,0 +1,13 @@
+.button {
+  position: fixed;
+  padding-inline: 25px;
+  padding-block: 10px;
+  background-color: var(--clr-black);
+  color: white;
+  border: none;
+  border-radius: var(--btn-radius);
+  bottom: 50px;
+  cursor: pointer;
+  right: 50px;
+  z-index: 1;
+}

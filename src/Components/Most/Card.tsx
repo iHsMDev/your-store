@@ -1,3 +1,4 @@
+"use client";
 import { motion } from "framer-motion";
 import { useSession } from "next-auth/react";
 import Image from "next/image";

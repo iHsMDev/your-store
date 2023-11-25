@@ -59,7 +59,7 @@ export const AddToCart = async (index: string, email: string, carts?: []) => {
         { total: (user.total += order.price) }
       );
       return {
-        message: "تم اضافة المنتج بنجاح",
+        message: "تم اضافة المنتج بنجاح إلى السلة",
         desc: order,
         ok: true,
       };
@@ -410,6 +410,28 @@ export const getProfileReviews = async (email: string) => {
     }
 
     return newArr;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
+export const getCategoryName = async (category: string) => {
+  try {
+    await connectToDB();
+    const cate_gory = await Category.findOne({ category_name: category });
+
+    return cate_gory;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
+export const getCategoryProducts = async (category: string) => {
+  try {
+    await connectToDB();
+    const products = await Product.find({ category: category });
+
+    return products;
   } catch (error: any) {
     throw new Error(error.message);
   }

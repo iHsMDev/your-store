@@ -72,11 +72,11 @@ const Item = ({
         <p className={styles.itemPrice}>
           {data && Math.floor(data?.price * count)}
         </p>
-        <p className={styles.itemCount}>{count}</p>
       </div>
       <Actions
         email={user.data?.user?.email as string}
         id={data?._id as string}
+        count={count}
       />
     </motion.div>
   );
